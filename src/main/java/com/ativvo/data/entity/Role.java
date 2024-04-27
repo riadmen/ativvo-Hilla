@@ -1,4 +1,4 @@
-package com.example.application.data;
+package com.ativvo.data.entity;
 
 public enum Role {
     USER, ADMIN;

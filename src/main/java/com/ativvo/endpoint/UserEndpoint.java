@@ -1,7 +1,7 @@
-package com.example.application.services;
+package com.ativvo.endpoint;
 
-import com.example.application.data.User;
-import com.example.application.security.AuthenticatedUser;
+import com.ativvo.security.AuthenticatedUser;
+import com.ativvo.data.entity.User;
 import com.vaadin.flow.server.auth.AnonymousAllowed;
 import dev.hilla.Endpoint;
 import java.util.Optional;

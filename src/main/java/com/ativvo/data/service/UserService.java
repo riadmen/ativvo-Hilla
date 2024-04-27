@@ -1,7 +1,7 @@
-package com.example.application.services;
+package com.ativvo.data.service;
 
-import com.example.application.data.User;
-import com.example.application.data.UserRepository;
+import com.ativvo.data.entity.User;
+import com.ativvo.data.repository.UserRepository;
 import java.util.Optional;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;

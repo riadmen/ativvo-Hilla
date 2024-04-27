@@ -1,4 +1,4 @@
 @NonNullApi
-package com.example.application.services;
+package com.ativvo.endpoint;
 
 import org.springframework.lang.NonNullApi;

@@ -1,6 +1,7 @@
-package com.example.application.data;
+package com.ativvo.data.repository;
 
 
+import com.ativvo.data.entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 

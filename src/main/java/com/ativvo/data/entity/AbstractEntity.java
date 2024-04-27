@@ -1,4 +1,4 @@
-package com.example.application.data;
+package com.ativvo.data.entity;
 
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
