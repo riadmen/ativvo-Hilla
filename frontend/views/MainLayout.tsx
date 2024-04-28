@@ -1,6 +1,6 @@
 import {useAuth} from 'Frontend/util/auth.js';
 import {useRouteMetadata} from 'Frontend/util/routing.js';
-import React, {ReactNode, Suspense, useEffect, useState} from 'react';
+import React, {Suspense, useEffect, useState} from 'react';
 import {NavLink, Outlet, useLocation} from 'react-router-dom';
 import {
     Box,
@@ -38,7 +38,7 @@ export default function MainLayout() {
 
     return (
 
-        <div slot="drawer" className="flex flex-col justify-between h-full">
+        <Box>
             <Header>
                 <Header.Item>
                     <Header.Link href="#" sx={{fontSize: 2}}>
@@ -78,8 +78,10 @@ export default function MainLayout() {
                     </Box>
                 </SplitPageLayout.Pane>
                 <SplitPageLayout.Content
+                    padding="none"
                     sx={{
                         minHeight: 'calc(100vh - 64px)',
+                        paddingTop: 24,
                     }}
                 >
                     <Suspense>
@@ -87,6 +89,6 @@ export default function MainLayout() {
                     </Suspense>
                 </SplitPageLayout.Content>
             </SplitPageLayout>
-        </div>
+        </Box>
     );
 }
