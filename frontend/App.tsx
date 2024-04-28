@@ -6,7 +6,7 @@ import {BaseStyles, ThemeProvider} from "@primer/react";
 export default function App() {
   return (
     <AuthProvider>
-        <ThemeProvider>
+        <ThemeProvider colorMode="day" dayScheme="light_colorblind">
             <BaseStyles>
                 <RouterProvider router={router} />
             </BaseStyles>

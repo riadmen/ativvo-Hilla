@@ -2,6 +2,7 @@ package com.ativvo;
 
 import com.ativvo.data.repository.UserRepository;
 import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.theme.NoTheme;
 import com.vaadin.flow.theme.Theme;
 import javax.sql.DataSource;
 import org.springframework.boot.SpringApplication;
@@ -18,7 +19,7 @@ import org.springframework.context.annotation.Bean;
  *
  */
 @SpringBootApplication
-@Theme(value = "ativvo")
+@NoTheme
 public class Application implements AppShellConfigurator {
 
     public static void main(String[] args) {

@@ -78,15 +78,12 @@ export default function MainLayout() {
                     </Box>
                 </SplitPageLayout.Pane>
                 <SplitPageLayout.Content
-                    padding="none"
+                    width='xlarge'
                     sx={{
                         minHeight: 'calc(100vh - 64px)',
-                        paddingTop: 24,
                     }}
                 >
-                    <Suspense>
                         <Outlet/>
-                    </Suspense>
                 </SplitPageLayout.Content>
             </SplitPageLayout>
         </Box>
