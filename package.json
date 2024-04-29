@@ -3,6 +3,9 @@
   "license": "UNLICENSED",
   "type": "module",
   "dependencies": {
+    "@emotion/react": "^11.11.4",
+    "@emotion/styled": "^11.11.5",
+    "@fontsource/roboto": "^5.0.13",
     "@hilla/form": "2.5.7",
     "@hilla/frontend": "2.5.7",
     "@hilla/generator-typescript-cli": "2.5.7",
@@ -18,8 +21,10 @@
     "@hilla/react-components": "2.3.0",
     "@hilla/react-crud": "2.5.7",
     "@hilla/react-form": "2.5.7",
+    "@mui/icons-material": "^5.15.15",
+    "@mui/material": "^5.15.15",
+    "@mui/x-charts": "^7.3.1",
     "@polymer/polymer": "3.5.1",
-    "@primer/react": "^36.16.0",
     "@vaadin/bundles": "24.3.0",
     "@vaadin/common-frontend": "0.0.19",
     "@vaadin/router": "1.7.5",
@@ -28,8 +33,7 @@
     "lit": "3.1.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.4.2",
-    "styled-components": "^5.3.11"
+    "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
     "@lit-labs/react": "^1.1.0",
@@ -78,8 +82,12 @@
     "@hilla/react-crud": "$@hilla/react-crud",
     "@hilla/generator-typescript-plugin-backbone": "$@hilla/generator-typescript-plugin-backbone",
     "@hilla/generator-typescript-cli": "$@hilla/generator-typescript-cli",
-    "@primer/react": "$@primer/react",
-    "styled-components": "$styled-components"
+    "@emotion/react": "$@emotion/react",
+    "@emotion/styled": "$@emotion/styled",
+    "@fontsource/roboto": "$@fontsource/roboto",
+    "@mui/icons-material": "$@mui/icons-material",
+    "@mui/material": "$@mui/material",
+    "@mui/x-charts": "$@mui/x-charts"
   },
   "vaadin": {
     "dependencies": {
@@ -123,6 +131,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "9b178d2a7f301a48ef5c16d34dc80e18e46567eb85d91efc0e74deb46c8f831d"
+    "hash": "ab1159e2ba9b35211a1c9addac928e6f454689864e3d15e7ad7a7c6c4fb59981"
   }
 }
