@@ -28,6 +28,9 @@ import {
     MemoryRouter,
     useLocation,
 } from 'react-router-dom';
+import Header from "Frontend/views/Header";
+import Sidebar from "Frontend/views/Sidebar";
+import {useTheme} from "@mui/material/styles";
 
 function PeopleIcon() {
     return null;
@@ -107,111 +110,41 @@ export default function MainLayout() {
         },
     );
 
-    return (
+    const theme = useTheme();
 
-        <Box sx={{display: 'flex'}}>
-            <AppBar position="absolute" open={open}>
-                <Toolbar
-                    sx={{
-                        pr: '24px', // keep right padding when drawer closed
-                    }}
-                >
-                    <IconButton
-                        edge="start"
-                        color="inherit"
-                        aria-label="open drawer"
-                        onClick={toggleDrawer}
-                        sx={{
-                            marginRight: '36px',
-                            ...(open && {display: 'none'}),
-                        }}
-                    >
-                        <MenuIcon/>
-                    </IconButton>
-                    <Typography
-                        component="h1"
-                        variant="h6"
-                        color="inherit"
-                        noWrap
-                        sx={{flexGrow: 1}}
-                    >
-                        {currentTitle}
-                    </Typography>
-                    <IconButton color="inherit">
-                        <Badge badgeContent={4} color="secondary">
-                            <NotificationsIcon/>
-                        </Badge>
-                    </IconButton>
-                </Toolbar>
-            </AppBar>
-            <Drawer variant="permanent" open={open}>
-                <Toolbar
-                    sx={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'flex-end',
-                        px: [1],
-                    }}
-                >
-                    <IconButton onClick={toggleDrawer}>
-                        <ChevronLeftIcon/>
-                    </IconButton>
-                </Toolbar>
-                <Divider/>
-                <List component="nav">
-                    <ListItemButton component={Link} to="/">
-                        <ListItemIcon>
-                            <DashboardIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Dashboard"/>
-                    </ListItemButton>
-                    <ListItemButton component={Link} to="/about">
-                        <ListItemIcon>
-                            <ShoppingCartIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Orders"/>
-                    </ListItemButton>
-                    <ListItemButton component={Link} to="/about">
-                        <ListItemIcon>
-                            <PeopleIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Customers"/>
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <BarChartIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Reports"/>
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <LayersIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary="Integrations"/>
-                    </ListItemButton>
-                </List>
-            </Drawer>
+    return (
+        <>
+            <Header/>
+            <Sidebar/>
+
             <Box
-                component="main"
                 sx={{
-                    backgroundColor: (theme) =>
-                        theme.palette.mode === 'light'
-                            ? theme.palette.grey[100]
-                            : theme.palette.grey[900],
-                    flexGrow: 1,
-                    height: '100vh',
-                    overflow: 'auto',
+                    position: 'relative',
+                    zIndex: 5,
+                    flex: 1,
+                    display: 'flex',
+                    pt: `${theme.header.height}`,
+                    [theme.breakpoints.up('lg')]: {
+                        pl: `${theme.sidebar.width}`
+                    }
                 }}
             >
-                <Toolbar/>
-                <Container maxWidth="lg" sx={{mt: 4, mb: 4}}>
-                    <Suspense>
-                        <Outlet/>
-                    </Suspense>
-                </Container>
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flex: 1,
+                        flexDirection: 'column',
+                        width: '100%'
+                    }}
+                >
+                    <Box flexGrow={1}>
+                        <Suspense>
+                            <Outlet/>
+                        </Suspense>
+                    </Box>
+                </Box>
             </Box>
-        </Box>
 
-
+        </>
     );
 }

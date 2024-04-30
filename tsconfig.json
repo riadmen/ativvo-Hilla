@@ -26,7 +26,10 @@
     "paths": {
       "@vaadin/flow-frontend": ["generated/jar-resources"],
       "@vaadin/flow-frontend/*": ["generated/jar-resources/*"],
-      "Frontend/*": ["*"]
+      "Frontend/*": ["*"],
+      "@components/*": ["components/*"],
+      "@i18n/*": ["i18n/*"],
+      "@contexts/*": ["contexts/*"]
     }
   },
   "include": [

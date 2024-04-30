@@ -32,9 +32,15 @@
     "@vaadin/router": "1.7.5",
     "classnames": "^2.3.2",
     "construct-style-sheets-polyfill": "3.1.0",
+    "country-flag-icons": "^1.5.11",
+    "date-fns": "^3.6.0",
+    "i18next": "^23.11.3",
     "lit": "3.1.2",
     "react": "^18.2.0",
+    "react-circular-progressbar": "^2.1.0",
+    "react-custom-scrollbars-2": "^4.5.0",
     "react-dom": "^18.2.0",
+    "react-i18next": "^14.1.1",
     "react-router-dom": "^6.4.2"
   },
   "devDependencies": {
@@ -91,7 +97,13 @@
     "@mui/material": "$@mui/material",
     "@mui/x-charts": "$@mui/x-charts",
     "@mui/x-data-grid": "$@mui/x-data-grid",
-    "@mui/styles": "$@mui/styles"
+    "@mui/styles": "$@mui/styles",
+    "country-flag-icons": "$country-flag-icons",
+    "date-fns": "$date-fns",
+    "i18next": "$i18next",
+    "react-i18next": "$react-i18next",
+    "react-circular-progressbar": "$react-circular-progressbar",
+    "react-custom-scrollbars-2": "$react-custom-scrollbars-2"
   },
   "vaadin": {
     "dependencies": {
@@ -135,6 +147,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "ad6f8cf0b66f8f81258844d3019cdb09ab3fb429f188070f708f53438bea52c0"
+    "hash": "ec59b0416be9e26e2cf29096b692f022a3a7fb580413c2b6a88cd53847999772"
   }
 }
