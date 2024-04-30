@@ -112,7 +112,6 @@ export default function MainLayout() {
         <Box sx={{display: 'flex'}}>
             <AppBar position="absolute" open={open}>
                 <Toolbar
-                    variant="dense"
                     sx={{
                         pr: '24px', // keep right padding when drawer closed
                     }}
@@ -147,7 +146,6 @@ export default function MainLayout() {
             </AppBar>
             <Drawer variant="permanent" open={open}>
                 <Toolbar
-                    variant="dense"
                     sx={{
                         display: 'flex',
                         alignItems: 'center',

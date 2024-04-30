@@ -23,6 +23,7 @@
     "@hilla/react-form": "2.5.7",
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
+    "@mui/styles": "^5.15.15",
     "@mui/x-charts": "^7.3.1",
     "@mui/x-data-grid": "^7.3.1",
     "@polymer/polymer": "3.5.1",
@@ -89,7 +90,8 @@
     "@mui/icons-material": "$@mui/icons-material",
     "@mui/material": "$@mui/material",
     "@mui/x-charts": "$@mui/x-charts",
-    "@mui/x-data-grid": "$@mui/x-data-grid"
+    "@mui/x-data-grid": "$@mui/x-data-grid",
+    "@mui/styles": "$@mui/styles"
   },
   "vaadin": {
     "dependencies": {
@@ -133,6 +135,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "68510bc4889ddd7c3c614be66797415f363bc94f2393b153268911c6b2c0f2b5"
+    "hash": "ad6f8cf0b66f8f81258844d3019cdb09ab3fb429f188070f708f53438bea52c0"
   }
 }
