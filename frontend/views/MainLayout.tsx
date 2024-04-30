@@ -46,12 +46,6 @@ export default function MainLayout() {
             state.user.profilePicture.reduce((str, n) => str + String.fromCharCode((n + 256) % 256), ''),
         )}`;
 
-    const [activeItem, setActiveItem] = useState("/");
-
-    const handleClick = (path: string) => {
-        setActiveItem(path);
-    };
-
     const drawerWidth: number = 240;
 
     interface AppBarProps extends MuiAppBarProps {
@@ -142,7 +136,7 @@ export default function MainLayout() {
                         noWrap
                         sx={{flexGrow: 1}}
                     >
-                        Dashboard
+                        {currentTitle}
                     </Typography>
                     <IconButton color="inherit">
                         <Badge badgeContent={4} color="secondary">

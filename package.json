@@ -24,6 +24,7 @@
     "@mui/icons-material": "^5.15.15",
     "@mui/material": "^5.15.15",
     "@mui/x-charts": "^7.3.1",
+    "@mui/x-data-grid": "^7.3.1",
     "@polymer/polymer": "3.5.1",
     "@vaadin/bundles": "24.3.0",
     "@vaadin/common-frontend": "0.0.19",
@@ -87,7 +88,8 @@
     "@fontsource/roboto": "$@fontsource/roboto",
     "@mui/icons-material": "$@mui/icons-material",
     "@mui/material": "$@mui/material",
-    "@mui/x-charts": "$@mui/x-charts"
+    "@mui/x-charts": "$@mui/x-charts",
+    "@mui/x-data-grid": "$@mui/x-data-grid"
   },
   "vaadin": {
     "dependencies": {
@@ -131,6 +133,6 @@
       "workbox-core": "7.0.0",
       "workbox-precaching": "7.0.0"
     },
-    "hash": "ab1159e2ba9b35211a1c9addac928e6f454689864e3d15e7ad7a7c6c4fb59981"
+    "hash": "68510bc4889ddd7c3c614be66797415f363bc94f2393b153268911c6b2c0f2b5"
   }
 }

@@ -10,4 +10,7 @@ import com.ativvo.data.entity.SamplePerson;
 @AnonymousAllowed
 public class SamplePersonService extends ListRepositoryService<SamplePerson, Long, SamplePersonRepository> {
 
+    public void delete(Long id) {
+        getRepository().deleteById(id);
+    }
 }
