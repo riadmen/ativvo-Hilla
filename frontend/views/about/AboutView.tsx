@@ -14,6 +14,8 @@ import DeleteIcon from '@mui/icons-material/DeleteOutlined';
 import TextField from '@mui/material/TextField';
 import {SamplePersonService} from "Frontend/generated/endpoints";
 import SamplePerson from "Frontend/generated/com/ativvo/data/entity/SamplePerson";
+import PageTitleWrapper from "Frontend/components/PageTitleWrapper";
+import PageHeader from "Frontend/components/PageHeaderDocs";
 
 
 export default function AboutView() {
@@ -243,286 +245,295 @@ export default function AboutView() {
     };
 
     return (
-        <Box>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description"
-            >
-                <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                        Are you sure you want to delete this person?
-                    </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Cancel</Button>
-                    <Button onClick={handleDelete} autoFocus>
-                        Delete
-                    </Button>
-                </DialogActions>
-            </Dialog>
+        <>
+            <PageTitleWrapper>
+                <PageHeader heading="Product" subheading="Test"/>
+            </PageTitleWrapper>
 
-            <Dialog
-                open={openAddDialog}
-                onClose={handleAddClose}
-                aria-labelledby="form-dialog-title"
+
+            <Box
+                p={3}
             >
-                <DialogTitle id="form-dialog-title">Add New Person</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="firstName"
-                        label="First Name"
-                        type="text"
-                        fullWidth
-                        value={newFirstName}
-                        onChange={e => setNewFirstName(e.target.value)}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="lastName"
-                        label="Last Name"
-                        type="text"
-                        fullWidth
-                        value={newLastName}
-                        onChange={e => setNewLastName(e.target.value)}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="email"
-                        label="Email"
-                        type="email"
-                        fullWidth
-                        value={newEmail}
-                        onChange={e => setNewEmail(e.target.value)}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="phone"
-                        label="Phone"
-                        type="tel"
-                        fullWidth
-                        value={newPhone}
-                        onChange={e => setNewPhone(e.target.value)}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="dateOfBirth"
-                        label="Date of Birth"
-                        type="date"
-                        fullWidth
-                        value={newDateOfBirth}
-                        onChange={e => setNewDateOfBirth(e.target.value)}
-                        InputLabelProps={{
-                            shrink: true,
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                >
+                    <DialogTitle id="alert-dialog-title">{"Confirm Deletion"}</DialogTitle>
+                    <DialogContent>
+                        <DialogContentText id="alert-dialog-description">
+                            Are you sure you want to delete this person?
+                        </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose}>Cancel</Button>
+                        <Button onClick={handleDelete} autoFocus>
+                            Delete
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={openAddDialog}
+                    onClose={handleAddClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">Add New Person</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="firstName"
+                            label="First Name"
+                            type="text"
+                            fullWidth
+                            value={newFirstName}
+                            onChange={e => setNewFirstName(e.target.value)}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="lastName"
+                            label="Last Name"
+                            type="text"
+                            fullWidth
+                            value={newLastName}
+                            onChange={e => setNewLastName(e.target.value)}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="email"
+                            label="Email"
+                            type="email"
+                            fullWidth
+                            value={newEmail}
+                            onChange={e => setNewEmail(e.target.value)}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="phone"
+                            label="Phone"
+                            type="tel"
+                            fullWidth
+                            value={newPhone}
+                            onChange={e => setNewPhone(e.target.value)}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="dateOfBirth"
+                            label="Date of Birth"
+                            type="date"
+                            fullWidth
+                            value={newDateOfBirth}
+                            onChange={e => setNewDateOfBirth(e.target.value)}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="occupation"
+                            label="Occupation"
+                            type="text"
+                            fullWidth
+                            value={newOccupation}
+                            onChange={e => setNewOccupation(e.target.value)}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="role"
+                            label="Role"
+                            type="text"
+                            fullWidth
+                            value={newRole}
+                            onChange={e => setNewRole(e.target.value)}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleAddClose}>Cancel</Button>
+                        <Button onClick={handleAdd}>Add</Button>
+                    </DialogActions>
+                </Dialog>
+                <Dialog
+                    open={openEditDialog}
+                    onClose={handleEditClose}
+                    aria-labelledby="form-dialog-title"
+                >
+                    <DialogTitle id="form-dialog-title">Edit Person</DialogTitle>
+                    <DialogContent>
+                        <TextField
+                            autoFocus
+                            margin="dense"
+                            id="firstName"
+                            label="First Name"
+                            type="text"
+                            fullWidth
+                            value={editPerson?.firstName}
+                            onChange={e => setEditPerson({
+                                ...editPerson,
+                                firstName: e.target.value,
+                                lastName: editPerson?.lastName || "",
+                                email: editPerson?.email || "",
+                                phone: editPerson?.phone || "",
+                                dateOfBirth: editPerson?.dateOfBirth || "",
+                                occupation: editPerson?.occupation || "",
+                                role: editPerson?.role || "",
+                                important: editPerson?.important || false,
+                                id: editPerson?.id || 0,
+                                version: editPerson?.version || 0
+                            })}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="lastName"
+                            label="Last Name"
+                            type="text"
+                            fullWidth
+                            value={editPerson?.lastName}
+                            onChange={e => setEditPerson({
+                                ...editPerson,
+                                firstName: editPerson?.firstName || "",
+                                lastName: e.target.value,
+                                email: editPerson?.email || "",
+                                phone: editPerson?.phone || "",
+                                dateOfBirth: editPerson?.dateOfBirth || "",
+                                occupation: editPerson?.occupation || "",
+                                role: editPerson?.role || "",
+                                important: editPerson?.important || false,
+                                id: editPerson?.id || 0,
+                                version: editPerson?.version || 0
+                            })}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="email"
+                            label="Email"
+                            type="email"
+                            fullWidth
+                            value={editPerson?.email}
+                            onChange={e => setEditPerson({
+                                ...editPerson,
+                                firstName: editPerson?.firstName || "",
+                                lastName: editPerson?.lastName || "",
+                                email: e.target.value,
+                                phone: editPerson?.phone || "",
+                                dateOfBirth: editPerson?.dateOfBirth || "",
+                                occupation: editPerson?.occupation || "",
+                                role: editPerson?.role || "",
+                                important: editPerson?.important || false,
+                                id: editPerson?.id || 0,
+                                version: editPerson?.version || 0
+                            })}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="phone"
+                            label="Phone"
+                            type="tel"
+                            fullWidth
+                            value={editPerson?.phone}
+                            onChange={e => setEditPerson({
+                                ...editPerson,
+                                firstName: editPerson?.firstName || "",
+                                lastName: editPerson?.lastName || "",
+                                email: editPerson?.email || "",
+                                phone: e.target.value,
+                                dateOfBirth: editPerson?.dateOfBirth || "",
+                                occupation: editPerson?.occupation || "",
+                                role: editPerson?.role || "",
+                                important: editPerson?.important || false,
+                                id: editPerson?.id || 0,
+                                version: editPerson?.version || 0
+                            })}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="dateOfBirth"
+                            label="Date of Birth"
+                            type="date"
+                            fullWidth
+                            value={editPerson?.dateOfBirth}
+                            onChange={e => setEditPerson({
+                                ...editPerson,
+                                firstName: editPerson?.firstName || "",
+                                lastName: editPerson?.lastName || "",
+                                email: editPerson?.email || "",
+                                phone: editPerson?.phone || "",
+                                dateOfBirth: e.target.value,
+                                occupation: editPerson?.occupation || "",
+                                role: editPerson?.role || "",
+                                important: editPerson?.important || false,
+                                id: editPerson?.id || 0,
+                                version: editPerson?.version || 0
+                            })}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="occupation"
+                            label="Occupation"
+                            type="text"
+                            fullWidth
+                            value={editPerson?.occupation}
+                            onChange={e => setEditPerson({
+                                ...editPerson,
+                                firstName: editPerson?.firstName || "",
+                                lastName: editPerson?.lastName || "",
+                                email: editPerson?.email || "",
+                                phone: editPerson?.phone || "",
+                                dateOfBirth: editPerson?.dateOfBirth || "",
+                                occupation: e.target.value,
+                                role: editPerson?.role || "",
+                                important: editPerson?.important || false,
+                                id: editPerson?.id || 0,
+                                version: editPerson?.version || 0
+                            })}
+                        />
+                        <TextField
+                            margin="dense"
+                            id="role"
+                            label="Role"
+                            type="text"
+                            fullWidth
+                            value={editPerson?.role}
+                            onChange={e => setEditPerson({
+                                ...editPerson,
+                                firstName: editPerson?.firstName || "",
+                                lastName: editPerson?.lastName || "",
+                                email: editPerson?.email || "",
+                                phone: editPerson?.phone || "",
+                                dateOfBirth: editPerson?.dateOfBirth || "",
+                                occupation: editPerson?.occupation || "",
+                                role: e.target.value,
+                                important: editPerson?.important || false,
+                                id: editPerson?.id || 0,
+                                version: editPerson?.version || 0
+                            })}
+                        />
+                    </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleEditClose}>Cancel</Button>
+                        <Button onClick={handleEdit}>Save</Button>
+                    </DialogActions>
+                </Dialog>
+                <Paper sx={{p: 0, display: 'flex', flexDirection: 'column', height: height}}>
+                    <DataGrid
+                        initialState={{
+                            density: 'compact',
+                        }}
+                        autoPageSize
+                        disableColumnMenu
+                        disableRowSelectionOnClick
+                        rows={rows}
+                        columns={columns}
+                        slots={{
+                            toolbar: CustomToolbar
                         }}
                     />
-                    <TextField
-                        margin="dense"
-                        id="occupation"
-                        label="Occupation"
-                        type="text"
-                        fullWidth
-                        value={newOccupation}
-                        onChange={e => setNewOccupation(e.target.value)}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="role"
-                        label="Role"
-                        type="text"
-                        fullWidth
-                        value={newRole}
-                        onChange={e => setNewRole(e.target.value)}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleAddClose}>Cancel</Button>
-                    <Button onClick={handleAdd}>Add</Button>
-                </DialogActions>
-            </Dialog>
-            <Dialog
-                open={openEditDialog}
-                onClose={handleEditClose}
-                aria-labelledby="form-dialog-title"
-            >
-                <DialogTitle id="form-dialog-title">Edit Person</DialogTitle>
-                <DialogContent>
-                    <TextField
-                        autoFocus
-                        margin="dense"
-                        id="firstName"
-                        label="First Name"
-                        type="text"
-                        fullWidth
-                        value={editPerson?.firstName}
-                        onChange={e => setEditPerson({
-                            ...editPerson,
-                            firstName: e.target.value,
-                            lastName: editPerson?.lastName || "",
-                            email: editPerson?.email || "",
-                            phone: editPerson?.phone || "",
-                            dateOfBirth: editPerson?.dateOfBirth || "",
-                            occupation: editPerson?.occupation || "",
-                            role: editPerson?.role || "",
-                            important: editPerson?.important || false,
-                            id: editPerson?.id || 0,
-                            version: editPerson?.version || 0
-                        })}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="lastName"
-                        label="Last Name"
-                        type="text"
-                        fullWidth
-                        value={editPerson?.lastName}
-                        onChange={e => setEditPerson({
-                            ...editPerson,
-                            firstName: editPerson?.firstName || "",
-                            lastName: e.target.value,
-                            email: editPerson?.email || "",
-                            phone: editPerson?.phone || "",
-                            dateOfBirth: editPerson?.dateOfBirth || "",
-                            occupation: editPerson?.occupation || "",
-                            role: editPerson?.role || "",
-                            important: editPerson?.important || false,
-                            id: editPerson?.id || 0,
-                            version: editPerson?.version || 0
-                        })}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="email"
-                        label="Email"
-                        type="email"
-                        fullWidth
-                        value={editPerson?.email}
-                        onChange={e => setEditPerson({
-                            ...editPerson,
-                            firstName: editPerson?.firstName || "",
-                            lastName: editPerson?.lastName || "",
-                            email: e.target.value,
-                            phone: editPerson?.phone || "",
-                            dateOfBirth: editPerson?.dateOfBirth || "",
-                            occupation: editPerson?.occupation || "",
-                            role: editPerson?.role || "",
-                            important: editPerson?.important || false,
-                            id: editPerson?.id || 0,
-                            version: editPerson?.version || 0
-                        })}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="phone"
-                        label="Phone"
-                        type="tel"
-                        fullWidth
-                        value={editPerson?.phone}
-                        onChange={e => setEditPerson({
-                            ...editPerson,
-                            firstName: editPerson?.firstName || "",
-                            lastName: editPerson?.lastName || "",
-                            email: editPerson?.email || "",
-                            phone: e.target.value,
-                            dateOfBirth: editPerson?.dateOfBirth || "",
-                            occupation: editPerson?.occupation || "",
-                            role: editPerson?.role || "",
-                            important: editPerson?.important || false,
-                            id: editPerson?.id || 0,
-                            version: editPerson?.version || 0
-                        })}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="dateOfBirth"
-                        label="Date of Birth"
-                        type="date"
-                        fullWidth
-                        value={editPerson?.dateOfBirth}
-                        onChange={e => setEditPerson({
-                            ...editPerson,
-                            firstName: editPerson?.firstName || "",
-                            lastName: editPerson?.lastName || "",
-                            email: editPerson?.email || "",
-                            phone: editPerson?.phone || "",
-                            dateOfBirth: e.target.value,
-                            occupation: editPerson?.occupation || "",
-                            role: editPerson?.role || "",
-                            important: editPerson?.important || false,
-                            id: editPerson?.id || 0,
-                            version: editPerson?.version || 0
-                        })}
-                        InputLabelProps={{
-                            shrink: true,
-                        }}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="occupation"
-                        label="Occupation"
-                        type="text"
-                        fullWidth
-                        value={editPerson?.occupation}
-                        onChange={e => setEditPerson({
-                            ...editPerson,
-                            firstName: editPerson?.firstName || "",
-                            lastName: editPerson?.lastName || "",
-                            email: editPerson?.email || "",
-                            phone: editPerson?.phone || "",
-                            dateOfBirth: editPerson?.dateOfBirth || "",
-                            occupation: e.target.value,
-                            role: editPerson?.role || "",
-                            important: editPerson?.important || false,
-                            id: editPerson?.id || 0,
-                            version: editPerson?.version || 0
-                        })}
-                    />
-                    <TextField
-                        margin="dense"
-                        id="role"
-                        label="Role"
-                        type="text"
-                        fullWidth
-                        value={editPerson?.role}
-                        onChange={e => setEditPerson({
-                            ...editPerson,
-                            firstName: editPerson?.firstName || "",
-                            lastName: editPerson?.lastName || "",
-                            email: editPerson?.email || "",
-                            phone: editPerson?.phone || "",
-                            dateOfBirth: editPerson?.dateOfBirth || "",
-                            occupation: editPerson?.occupation || "",
-                            role: e.target.value,
-                            important: editPerson?.important || false,
-                            id: editPerson?.id || 0,
-                            version: editPerson?.version || 0
-                        })}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleEditClose}>Cancel</Button>
-                    <Button onClick={handleEdit}>Save</Button>
-                </DialogActions>
-            </Dialog>
-            <Paper sx={{p: 0, display: 'flex', flexDirection: 'column', height: height}}>
-                <DataGrid
-                    initialState={{
-                        density: 'compact',
-                    }}
-                    autoPageSize
-                    disableColumnMenu
-                    disableRowSelectionOnClick
-                    rows={rows}
-                    columns={columns}
-                    slots={{
-                        toolbar: CustomToolbar
-                    }}
-                />
-            </Paper>
-        </Box>
+                </Paper>
+            </Box>
+        </>
     );
 }
