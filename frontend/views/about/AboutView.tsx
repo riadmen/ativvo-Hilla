@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {SamplePersonService} from "Frontend/generated/endpoints";
-import SamplePerson from "Frontend/generated/com/ativvo/data/entity/SamplePerson";
 import Box from "@mui/material/Box";
 import {
     DataGrid,
@@ -14,6 +13,7 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import SamplePerson from "Frontend/generated/com/ativvo/data/entity/SamplePerson";
 
 export default function AboutView() {
 
