@@ -1,11 +1,9 @@
 import React, {useEffect, useState} from "react";
-import {SamplePersonService} from "Frontend/generated/endpoints";
 import Box from "@mui/material/Box";
 import {
     DataGrid,
     GridRowsProp,
     GridColDef,
-    GridToolbar,
     GridToolbarContainer,
     GridToolbarExport, GridToolbarFilterButton, GridColumnMenu, GridColumnMenuProps, GridActionsCellItem
 } from '@mui/x-data-grid';
@@ -13,7 +11,10 @@ import {Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogT
 import AddIcon from '@mui/icons-material/Add';
 import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/DeleteOutlined';
+import TextField from '@mui/material/TextField';
+import {SamplePersonService} from "Frontend/generated/endpoints";
 import SamplePerson from "Frontend/generated/com/ativvo/data/entity/SamplePerson";
+
 
 export default function AboutView() {
 
@@ -72,6 +73,7 @@ export default function AboutView() {
                         label="Edit"
                         className="textPrimary"
                         color="inherit"
+                        onClick={() => handleEditOpen(Number(id))}
                     />,
                     <GridActionsCellItem
                         icon={<DeleteIcon/>}
@@ -145,7 +147,7 @@ export default function AboutView() {
     function CustomToolbar() {
         return (
             <GridToolbarContainer>
-                <Button color="primary" startIcon={<AddIcon/>}>
+                <Button color="primary" startIcon={<AddIcon/>} onClick={handleAddOpen}>
                     Add record
                 </Button>
                 <GridToolbarFilterButton/>
@@ -153,6 +155,92 @@ export default function AboutView() {
             </GridToolbarContainer>
         );
     }
+
+    const [openAddDialog, setOpenAddDialog] = React.useState(false);
+    const [newFirstName, setNewFirstName] = React.useState("");
+    const [newLastName, setNewLastName] = React.useState("");
+    const [newEmail, setNewEmail] = React.useState("");
+    const [newPhone, setNewPhone] = React.useState("");
+    const [newDateOfBirth, setNewDateOfBirth] = React.useState("");
+    const [newOccupation, setNewOccupation] = React.useState("");
+    const [newRole, setNewRole] = React.useState("");
+
+
+    const handleAddOpen = () => {
+        setOpenAddDialog(true);
+    };
+
+    const handleAddClose = () => {
+        setOpenAddDialog(false);
+    };
+
+    const handleAdd = () => {
+        const newPerson: SamplePerson = {
+            firstName: newFirstName,
+            lastName: newLastName,
+            email: newEmail,
+            phone: newPhone,
+            dateOfBirth: newDateOfBirth,
+            occupation: newOccupation,
+            role: newRole,
+            important: false,
+        } as SamplePerson;
+        SamplePersonService.add(newPerson)
+            .then(() => {
+                // Handle successful addition here
+                SamplePersonService.list(pageable, undefined)
+                    .then(data => {
+                        setSamplePersons(data);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching SamplePerson instances:', error);
+                    });
+            })
+            .catch((error: any) => {
+                console.error('Error adding SamplePerson instance:', error);
+            });
+        setOpenAddDialog(false);
+    };
+
+    // Add these state variables
+    const [openEditDialog, setOpenEditDialog] = React.useState(false);
+    const [editPerson, setEditPerson] = React.useState<SamplePerson | null>(null);
+
+// Add this function to handle opening of the edit dialog
+    const handleEditOpen = (id: number) => {
+        console.log(`Editing person with id: ${id}`);
+        const person = samplePersons.find(p => p.id === id);
+        if (person) {
+            setEditPerson(person);
+            setOpenEditDialog(true);
+        }
+    };
+
+// Add this function to handle closing of the edit dialog
+    const handleEditClose = () => {
+        setOpenEditDialog(false);
+    };
+
+// Add this function to handle the actual editing of the person
+    const handleEdit = () => {
+        if (editPerson !== null) {
+            SamplePersonService.update(editPerson)
+                .then(() => {
+                    // Handle successful update here
+                    SamplePersonService.list(pageable, undefined)
+                        .then(data => {
+                            setSamplePersons(data);
+                        })
+                        .catch(error => {
+                            console.error('Error fetching SamplePerson instances:', error);
+                        });
+                })
+                .catch((error: any) => {
+                    console.error('Error updating SamplePerson instance:', error);
+                });
+            setOpenEditDialog(false);
+        }
+    };
 
     return (
         <Box>
@@ -173,6 +261,251 @@ export default function AboutView() {
                     <Button onClick={handleDelete} autoFocus>
                         Delete
                     </Button>
+                </DialogActions>
+            </Dialog>
+
+            <Dialog
+                open={openAddDialog}
+                onClose={handleAddClose}
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogTitle id="form-dialog-title">Add New Person</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="firstName"
+                        label="First Name"
+                        type="text"
+                        fullWidth
+                        value={newFirstName}
+                        onChange={e => setNewFirstName(e.target.value)}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="lastName"
+                        label="Last Name"
+                        type="text"
+                        fullWidth
+                        value={newLastName}
+                        onChange={e => setNewLastName(e.target.value)}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="email"
+                        label="Email"
+                        type="email"
+                        fullWidth
+                        value={newEmail}
+                        onChange={e => setNewEmail(e.target.value)}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="phone"
+                        label="Phone"
+                        type="tel"
+                        fullWidth
+                        value={newPhone}
+                        onChange={e => setNewPhone(e.target.value)}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="dateOfBirth"
+                        label="Date of Birth"
+                        type="date"
+                        fullWidth
+                        value={newDateOfBirth}
+                        onChange={e => setNewDateOfBirth(e.target.value)}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="occupation"
+                        label="Occupation"
+                        type="text"
+                        fullWidth
+                        value={newOccupation}
+                        onChange={e => setNewOccupation(e.target.value)}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="role"
+                        label="Role"
+                        type="text"
+                        fullWidth
+                        value={newRole}
+                        onChange={e => setNewRole(e.target.value)}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleAddClose}>Cancel</Button>
+                    <Button onClick={handleAdd}>Add</Button>
+                </DialogActions>
+            </Dialog>
+            <Dialog
+                open={openEditDialog}
+                onClose={handleEditClose}
+                aria-labelledby="form-dialog-title"
+            >
+                <DialogTitle id="form-dialog-title">Edit Person</DialogTitle>
+                <DialogContent>
+                    <TextField
+                        autoFocus
+                        margin="dense"
+                        id="firstName"
+                        label="First Name"
+                        type="text"
+                        fullWidth
+                        value={editPerson?.firstName}
+                        onChange={e => setEditPerson({
+                            ...editPerson,
+                            firstName: e.target.value,
+                            lastName: editPerson?.lastName || "",
+                            email: editPerson?.email || "",
+                            phone: editPerson?.phone || "",
+                            dateOfBirth: editPerson?.dateOfBirth || "",
+                            occupation: editPerson?.occupation || "",
+                            role: editPerson?.role || "",
+                            important: editPerson?.important || false,
+                            id: editPerson?.id || 0,
+                            version: editPerson?.version || 0
+                        })}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="lastName"
+                        label="Last Name"
+                        type="text"
+                        fullWidth
+                        value={editPerson?.lastName}
+                        onChange={e => setEditPerson({
+                            ...editPerson,
+                            firstName: editPerson?.firstName || "",
+                            lastName: e.target.value,
+                            email: editPerson?.email || "",
+                            phone: editPerson?.phone || "",
+                            dateOfBirth: editPerson?.dateOfBirth || "",
+                            occupation: editPerson?.occupation || "",
+                            role: editPerson?.role || "",
+                            important: editPerson?.important || false,
+                            id: editPerson?.id || 0,
+                            version: editPerson?.version || 0
+                        })}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="email"
+                        label="Email"
+                        type="email"
+                        fullWidth
+                        value={editPerson?.email}
+                        onChange={e => setEditPerson({
+                            ...editPerson,
+                            firstName: editPerson?.firstName || "",
+                            lastName: editPerson?.lastName || "",
+                            email: e.target.value,
+                            phone: editPerson?.phone || "",
+                            dateOfBirth: editPerson?.dateOfBirth || "",
+                            occupation: editPerson?.occupation || "",
+                            role: editPerson?.role || "",
+                            important: editPerson?.important || false,
+                            id: editPerson?.id || 0,
+                            version: editPerson?.version || 0
+                        })}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="phone"
+                        label="Phone"
+                        type="tel"
+                        fullWidth
+                        value={editPerson?.phone}
+                        onChange={e => setEditPerson({
+                            ...editPerson,
+                            firstName: editPerson?.firstName || "",
+                            lastName: editPerson?.lastName || "",
+                            email: editPerson?.email || "",
+                            phone: e.target.value,
+                            dateOfBirth: editPerson?.dateOfBirth || "",
+                            occupation: editPerson?.occupation || "",
+                            role: editPerson?.role || "",
+                            important: editPerson?.important || false,
+                            id: editPerson?.id || 0,
+                            version: editPerson?.version || 0
+                        })}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="dateOfBirth"
+                        label="Date of Birth"
+                        type="date"
+                        fullWidth
+                        value={editPerson?.dateOfBirth}
+                        onChange={e => setEditPerson({
+                            ...editPerson,
+                            firstName: editPerson?.firstName || "",
+                            lastName: editPerson?.lastName || "",
+                            email: editPerson?.email || "",
+                            phone: editPerson?.phone || "",
+                            dateOfBirth: e.target.value,
+                            occupation: editPerson?.occupation || "",
+                            role: editPerson?.role || "",
+                            important: editPerson?.important || false,
+                            id: editPerson?.id || 0,
+                            version: editPerson?.version || 0
+                        })}
+                        InputLabelProps={{
+                            shrink: true,
+                        }}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="occupation"
+                        label="Occupation"
+                        type="text"
+                        fullWidth
+                        value={editPerson?.occupation}
+                        onChange={e => setEditPerson({
+                            ...editPerson,
+                            firstName: editPerson?.firstName || "",
+                            lastName: editPerson?.lastName || "",
+                            email: editPerson?.email || "",
+                            phone: editPerson?.phone || "",
+                            dateOfBirth: editPerson?.dateOfBirth || "",
+                            occupation: e.target.value,
+                            role: editPerson?.role || "",
+                            important: editPerson?.important || false,
+                            id: editPerson?.id || 0,
+                            version: editPerson?.version || 0
+                        })}
+                    />
+                    <TextField
+                        margin="dense"
+                        id="role"
+                        label="Role"
+                        type="text"
+                        fullWidth
+                        value={editPerson?.role}
+                        onChange={e => setEditPerson({
+                            ...editPerson,
+                            firstName: editPerson?.firstName || "",
+                            lastName: editPerson?.lastName || "",
+                            email: editPerson?.email || "",
+                            phone: editPerson?.phone || "",
+                            dateOfBirth: editPerson?.dateOfBirth || "",
+                            occupation: editPerson?.occupation || "",
+                            role: e.target.value,
+                            important: editPerson?.important || false,
+                            id: editPerson?.id || 0,
+                            version: editPerson?.version || 0
+                        })}
+                    />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={handleEditClose}>Cancel</Button>
+                    <Button onClick={handleEdit}>Save</Button>
                 </DialogActions>
             </Dialog>
             <Paper sx={{p: 0, display: 'flex', flexDirection: 'column', height: height}}>

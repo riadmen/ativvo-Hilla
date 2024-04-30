@@ -13,4 +13,16 @@ public class SamplePersonService extends ListRepositoryService<SamplePerson, Lon
     public void delete(Long id) {
         getRepository().deleteById(id);
     }
+
+    public SamplePerson add(SamplePerson person) {
+        return getRepository().save(person);
+    }
+
+    public SamplePerson update(SamplePerson person) {
+        if (getRepository().existsById(person.getId())) {
+            return getRepository().save(person);
+        } else {
+            throw new IllegalArgumentException("Person must have an id to be updated");
+        }
+    }
 }
