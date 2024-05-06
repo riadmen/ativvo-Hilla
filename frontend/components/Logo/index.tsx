@@ -105,11 +105,6 @@ function Logo() {
 
   return (
     <LogoWrapper href="/">
-      <LogoSignWrapper>
-        <LogoSign>
-          <LogoSignInner />
-        </LogoSign>
-      </LogoSignWrapper>
       <Box
         component="span"
         sx={{
@@ -117,10 +112,7 @@ function Logo() {
         }}
       >
         <LogoTextWrapper>
-          <Tooltip title={t('Version') + ' 3.1'} arrow placement="right">
-            <VersionBadge>3.1</VersionBadge>
-          </Tooltip>
-          <LogoText>Tokyo</LogoText>
+            <img src="images/ativvo.svg" alt="Ativvo" style={{height:'20px'}}/>
         </LogoTextWrapper>
       </Box>
     </LogoWrapper>

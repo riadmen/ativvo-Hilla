@@ -54,7 +54,6 @@ function Sidebar() {
                         >
                             <Logo/>
                         </Box>
-                        <SidebarTopSection/>
                     </TopSection>
                     <SidebarMenu/>
                 </Scrollbar>
@@ -82,7 +81,6 @@ function Sidebar() {
                             >
                                 <Logo/>
                             </Box>
-                            <SidebarTopSection/>
                         </TopSection>
                         <SidebarMenu/>
                     </Scrollbar>
